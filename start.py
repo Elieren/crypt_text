@@ -288,9 +288,7 @@ elif a == "D":
 	cop = ''
 
 	text = str(input(": "))
-
-	my_st = text
-	key = my_st.split("|")
+	key = text.split("|")
 
 	lop = len(key[0])
 	lor = (key[0])
