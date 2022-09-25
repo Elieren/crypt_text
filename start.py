@@ -83,7 +83,6 @@ if a == "S":
 				pass
 			nom += 1
 
-
 	low = len(cod)
 	low = str(low)
 	cod = cod + "|"
