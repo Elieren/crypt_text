@@ -28,6 +28,12 @@ class Encode():
                         "_", "+", "=", "{", "}", "[", "]", "'", ">",
                         "<", "/", "\\"]
 
+        for i in [self.__rus, self.__eng]:
+            temporary = []
+            for x in i:
+                temporary.append(x.lower())
+            i.extend(temporary)
+
         self.__full = self.__rus + self.__eng + self.__numbers + \
             self.__probel + self.__znaki
 
@@ -38,37 +44,11 @@ class Encode():
 
     def __encodeing(self):
         for i in self.__text_list:
-            x = 0
-            for r in self.__rus:
-                if i in r:
-                    self.__encode_text += f"{self.__baza[x]}"
-                else:
-                    pass
-                x += 1
-            for e in self.__eng:
-                if i in e:
-                    self.__encode_text += f"{self.__baza[x]}"
-                else:
-                    pass
-                x += 1
-            for n in self.__numbers:
-                if i in n:
-                    self.__encode_text += f"{self.__baza[x]}"
-                else:
-                    pass
-                x += 1
-            for p in self.__probel:
-                if i in p:
-                    self.__encode_text += f"{self.__baza[x]}"
-                else:
-                    pass
-                x += 1
-            for z in self.__znaki:
+            for x, z in enumerate(self.__full):
                 if i in z:
                     self.__encode_text += f"{self.__baza[x]}"
                 else:
                     pass
-                x += 1
 
     def __decoding(self):
         self.__decode_key = [self.__key[i:i + self.__length_key]
@@ -97,7 +77,7 @@ class Encode():
             self.__decode_text = "Error. The key doesn't fit."
 
     def encode(self, text):
-        self.__text = str(text.upper())
+        self.__text = str(text)
         self.__text_list = list(self.__text)
 
         self.__encode_text = ''
@@ -108,8 +88,8 @@ class Encode():
         self.__encode_text += '|'
 
         for i in text_len:
-            x = 59
-            for n in self.__numbers:
+            x = 118
+            for n in self.__full[118:128]:
                 if i in n:
                     self.__encode_text += f'{self.__baza[x]}'
                 else:
@@ -136,7 +116,7 @@ class Encode():
         key = []
         length = 5
 
-        for i in range(101):
+        for i in range(163):
             letters_and_digits = string.ascii_letters + string.digits
             rand_string = ''.join(random.sample(letters_and_digits, length))
             key.append(rand_string)
